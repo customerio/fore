@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+		<!--Easy launch pages from Customer.io. Just change the "data-site-id" down below and you can easily add new people to your customer.io account.	-->
+
+    <meta charset="utf-8">
+
+    <title>Sign up for our launch!</title>
+    <meta name="description" content="An example launch page to collect email addresses in Customer.io">
+
+    <!-- Mobile viewport optimized: h5bp.com/viewport -->
+    <meta name="viewport" content="width=device-width">
+
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/overrides.css">
+	</head>
+<body>
+
+	<div class="container" style="padding-top: 60px;">
+
+	
+	<div class="hero-unit">
+		<div class="header">
+			<h1 id="enticement">Sign up now!</h1>
+			<br/>
+		</div>
+
+    <div id="signUpForm">
+      <form>
+          <div class="input-prepend">
+            <span class="add-on"><i class="icon-user"></i></span><input class="input-large" type="text" id="firstname" name="firstname" placeholder="firstname">
+          </div>
+      
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-envelope"></i></span><input type="text" id="email" name="email" autocorrect="off" autocapitalize="off" data-initial="email@address.com" placeholder="email@domain.com">
+        </div>
+          <br/>
+        <button class="btn btn-primary btn-large" type="submit"><i class="icon-circle-arrow-right"></i> Sign up</button>
+      </form>
+		  <div id="result" class="alert"></div>
+    </div>
+    <div id="signedUp">
+      <p>You should totally share this everywhere. Go do it now</p>
+    </div>
+	</div>
+</div>
+
+	<!--Load the customer.io tracker-->
+	<script type="text/javascript">
+		var _cio = _cio || [];
+		(function() {
+			var a,b,c;a=function(f){return function(){_cio.push([f].
+			concat(Array.prototype.slice.call(arguments,0)))}};b=["identify",
+			"track"];for(c=0;c<b.length;c++){_cio[b[c]]=a(b[c])};
+			var t = document.createElement('script'),
+					s = document.getElementsByTagName('script')[0];
+			t.async = true;
+			t.id    = 'cio-tracker';
+			// THE ONLY THING YOU NEED TO CHANGE IS THE DATA-SITE-ID
+			t.setAttribute('data-site-id', '30860d08f0f6dd196dcc');
+			t.src = 'http://mvp.dev/assets/track.js';
+			s.parentNode.insertBefore(t, s);
+		})();
+	</script>
+
+	<!--Load jquery-->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+  <script text="text/javascript" src="js/jquery.cookie.js"></script>
+
+	<!--Identify the user to customer.io-->
+
+	<script type="text/javascript">
+		
+		function addUserToCustomerIO(){
+			var email = $("#email").val();
+      var firstName = $("#firstname").val();
+      var id = email.replace('@', '_');
+      id = id.replace('.', '_');
+
+
+			_cio.identify({
+			// Required Items
+			id: id,
+			email: email,
+			created_at: Math.round( new Date().getTime()/1000), // seconds since the epoch
+
+			// Optional (these are examples. You can name attributes what you wish)
+			type: 'pre-launch',
+			first_name: firstName,
+			referrer: document.referrer
+		});
+		};
+
+	</script>
+
+	<!--Validate the form submission-->
+	<script type="text/javascript">
+		function validateEmail(email) { 
+			// http://stackoverflow.com/a/46181/11236
+				var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				return re.test(email);
+		}
+
+		function validate(){
+			$("#result").text("");
+			var email = $("#email").val();
+			if (validateEmail(email)) {
+				$("#result").text("Thanks for signing up!");
+				$("#result").removeClass( "alert-error" );
+				$("#result").addClass( "alert-success" );
+				$("#result").show();
+        addUserToCustomerIO();
+        $.cookie("signedUp", true, { expires : 365 });
+        checkSignUp();
+			} else {
+				$("#result").text(email + " isn't a valid email. :(");
+				$("#result").addClass( "alert-error" );
+				$("#result").show();
+				
+			}
+			return false;
+		}
+
+		$("form").bind("submit", validate);
+
+  </script>
+
+
+  <script type="text/javascript">
+
+    function checkSignUp(){
+      if ($.cookie("signedUp")){
+        $("#enticement").text("Thanks for signing up!");
+        $("#signUpForm").hide();
+        $("#signedUp").show();
+      }
+        
+    };
+
+    checkSignUp();
+  </script>
+	
+</body>
+</html>

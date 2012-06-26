@@ -1,0 +1,11 @@
+input {
+	size: 50px;
+}
+
+#result {
+	display:none;
+}
+
+#signedUp {
+  display: none;
+}
