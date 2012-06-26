@@ -1,79 +1,122 @@
 
-<h1>Sign up now!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-<form>
-	<input type="text" id="firstname" name="firstname" placeholder="firstname">
-	<input type="text" id="email" name="email" autocorrect="off" autocapitalize="off" data-initial="email@address.com" placeholder="email@domain.com">
-	<button type="submit">Sign up</button>
-</form>
+		<!--Easy launch pages from Customer.io. Just change the "data-site-id" down below and you can easily add new people to your customer.io account.	-->
 
-<div id="result"></div>
+    <meta charset="utf-8">
 
-<!--Load the customer.io tracker-->
-<script type="text/javascript">
-  var _cio = _cio || [];
-  (function() {
-    var a,b,c;a=function(f){return function(){_cio.push([f].
-    concat(Array.prototype.slice.call(arguments,0)))}};b=["identify",
-    "track"];for(c=0;c<b.length;c++){_cio[b[c]]=a(b[c])};
-    var t = document.createElement('script'),
-        s = document.getElementsByTagName('script')[0];
-    t.async = true;
-    t.id    = 'cio-tracker';
-    t.setAttribute('data-site-id', '30860d08f0f6dd196dcc');
-    t.src = 'http://mvp.dev/assets/track.js';
-    s.parentNode.insertBefore(t, s);
-  })();
-</script>
+    <title>Sign up for our launch!</title>
+    <meta name="description" content="An example launch page to collect email addresses in Customer.io">
 
-<!--Load jquery-->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+    <!-- Mobile viewport optimized: h5bp.com/viewport -->
+    <meta name="viewport" content="width=device-width">
 
-<!--Identify the user to customer.io-->
 
-<script type="text/javascript">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/overrides.css">
+	</head>
+<body>
+
+	<div class="container" style="padding-top: 60px;">
+
 	
-	function addUserToCustomerIO(){
-		var email = $("#email").val();
-		var firstName = $("#firstname").val();
+	<div class="hero-unit">
+		<div class="header">
+			<h1>Sign up now!</h1>
+			<br/>
+		</div>
 
-		_cio.identify({
-    // Required Items
-    id: email,
-    email: email,
-    created_at: new Date().getTime(), // seconds since the epoch
 
-    // Optional (these are examples. You can name attributes what you wish)
-    type: 'pre-launch',
-		first_name: firstName,
-		referrer: document.referrer
-  });
-	};
+		<form>
+				<div class="input-prepend">
+					<span class="add-on"><i class="icon-user"></i></span><input class="input-large" type="text" id="firstname" name="firstname" placeholder="firstname">
+				</div>
+		
+			<div class="input-prepend">
+				<span class="add-on"><i class="icon-envelope"></i></span><input type="text" id="email" name="email" autocorrect="off" autocapitalize="off" data-initial="email@address.com" placeholder="email@domain.com">
+			</div>
+				<br/>
+			<button class="btn btn-primary btn-large" type="submit"><i class="icon-circle-arrow-right"></i> Sign up</button>
+		</form>
+		<div id="result" class="alert"></div>
+	</div>
+</div>
 
-</script>
+	<!--Load the customer.io tracker-->
+	<script type="text/javascript">
+		var _cio = _cio || [];
+		(function() {
+			var a,b,c;a=function(f){return function(){_cio.push([f].
+			concat(Array.prototype.slice.call(arguments,0)))}};b=["identify",
+			"track"];for(c=0;c<b.length;c++){_cio[b[c]]=a(b[c])};
+			var t = document.createElement('script'),
+					s = document.getElementsByTagName('script')[0];
+			t.async = true;
+			t.id    = 'cio-tracker';
+			// THE ONLY THING YOU NEED TO CHANGE IS THE DATA-SITE-ID
+			t.setAttribute('data-site-id', '30860d08f0f6dd196dcc');
+			t.src = 'http://mvp.dev/assets/track.js';
+			s.parentNode.insertBefore(t, s);
+		})();
+	</script>
 
-<!--Validate the form submission-->
-<script type="text/javascript">
-	function validateEmail(email) { 
-		// http://stackoverflow.com/a/46181/11236
-			var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-			return re.test(email);
-	}
+	<!--Load jquery-->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
 
-	function validate(){
-		$("#result").text("");
-		var email = $("#email").val();
-		if (validateEmail(email)) {
-			$("#result").text(email + " is valid :)");
-			$("#result").css("color", "green");
-			addUserToCustomerIO();
-		} else {
-			$("#result").text(email + "is not valid :(");
-			$("#result").css("color", "red");
+	<!--Identify the user to customer.io-->
+
+	<script type="text/javascript">
+		
+		function addUserToCustomerIO(){
+			var email = $("#email").val();
+			var firstName = $("#firstname").val();
+
+			_cio.identify({
+			// Required Items
+			id: email,
+			email: email,
+			created_at: Math.round( new Date().getTime()/1000), // seconds since the epoch
+
+			// Optional (these are examples. You can name attributes what you wish)
+			type: 'pre-launch',
+			first_name: firstName,
+			referrer: document.referrer
+		});
+		};
+
+	</script>
+
+	<!--Validate the form submission-->
+	<script type="text/javascript">
+		function validateEmail(email) { 
+			// http://stackoverflow.com/a/46181/11236
+				var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				return re.test(email);
 		}
-		return false;
-	}
 
-	$("form").bind("submit", validate);
+		function validate(){
+			$("#result").text("");
+			var email = $("#email").val();
+			if (validateEmail(email)) {
+				$("#result").text("Thanks for signing up!");
+				$("#result").removeClass( "alert-error" );
+				$("#result").addClass( "alert-success" );
+				$("#result").show();
+				addUserToCustomerIO();
+			} else {
+				$("#result").text(email + " isn't a valid email. :(");
+				$("#result").addClass( "alert-error" );
+				$("#result").show();
+				
+			}
+			return false;
+		}
 
-</script>
+		$("form").bind("submit", validate);
+
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,7 @@
+input {
+	size: 50px;
+}
+
+#result {
+	display:none;
+}
