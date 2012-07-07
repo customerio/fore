@@ -2,10 +2,11 @@ input {
 	size: 50px;
 }
 
-#result {
+#successMessage {
+  display: none;
+}
+
+#errorMessage {
 	display:none;
 }
 
-#signedUp {
-  display: none;
-}
