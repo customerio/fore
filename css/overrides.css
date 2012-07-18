@@ -1,0 +1,12 @@
+input {
+	size: 50px;
+}
+
+#successMessage {
+  display: none;
+}
+
+#errorMessage {
+	display:none;
+}
+
