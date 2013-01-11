@@ -71,3 +71,8 @@
   };
 })(jQuery);
 
+
+$(function() {
+  $("#cio-signupForm").signupForm("#cio-successMessage");
+});
+
